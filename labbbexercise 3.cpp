@@ -1,0 +1,63 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+void dispStatus(int acase);
+void getInput(int &tc, int &nc, int &td, int &tr);
+void dispOutput(int acases);
+float calcAverage(int total, int num);
+int main() {
+    char loop, name[100];;
+    int ac,ttcase,ncase,ttdeath,ttrcvr,total=0,numstate=0,average,highest=0;
+    string highstate;
+    do{
+    cout<<"<<<<<<<<<<<<<<<<<<<<DATA>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n";
+    cout<<"state name:";
+    cin.ignore();
+	cin.getline(name,100);
+    getInput(ttcase,ncase,ttdeath,ttrcvr);
+    cout<<"<<<<<<<<<<<<<<<<<<<SUMMARY>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n";
+    ac=ttcase+ncase-ttdeath-ttrcvr;
+    if(ac>highest){
+        highest=ac;
+	 	highstate=name;
+    }
+    dispOutput(ac);
+    cout<<"Press <ENTER> to continue...";
+    cin>>loop;
+    total+=ac;
+    numstate++;}
+    while(loop!='n'&&loop!='N');
+    average=calcAverage(total,numstate);
+    cout<<"total :"<<total<<endl;
+    cout<<"Highest:"<<highest<<"("<<highstate<<")"<<endl;
+    cout<<"Average for "<<numstate<<" states:"<<average<<endl;
+ return 0;
+}
+void dispStatus(int acase){
+    if(acase==0)
+    cout<<"status:green zone "<<endl;
+    if(acase>=1&&acase<=20)
+    cout<<"status:yellow zone "<<endl;
+    if(acase>=21&&acase<=40)
+    cout<<"status:orange zone "<<endl;
+    if(acase>40)
+    cout<<"status:red zone "<<endl;
+}
+void getInput(int &tc,int &nc,int &td,int &tr){
+    cout<<"total case:";
+    cin>>tc;
+    cout<<"new case:";
+    cin>>nc;
+    cout<<"total death:";
+    cin>>td;
+    cout<<"total recovered:";
+    cin>>tr;
+}
+void dispOutput(int acases){
+    cout<<"active cases:"<<acases<<endl;
+    dispStatus(acases);
+}
+float calcAverage(int tt,int num){
+    int avg=tt/num;
+    return avg;
+}
